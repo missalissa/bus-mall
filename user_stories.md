@@ -13,6 +13,9 @@ As a focus group participant, I want:
 * my voice to be heard
 * a survey that is engaging and easy to use, so that my input can be received
 * confirmation that my input has been received
+* the page to repopulate with images
+* to click on an image to vote
+* to know when I've used up all of my votes
 
 ###Developer
 As a developer, I want:
