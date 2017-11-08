@@ -2,94 +2,65 @@
 
 let clicks = 0;
 let shown = 0;
-let allProducts = []; // pushed from constructor function
+let allProducts = []; // is no longer pushed from constructor function
 
+if (localStorage.allProducts) {
+    console.log('We have products');
 
-//****CONSTRUCTOR & RENDER FUNCTIONS****//
+    // if we have products in localStorage
+    // get them, instantiate them, and them in our products array
 
-function Product(name, id, src) {
-    this.name = name;
-    this.id = id;
-    this.src = './images/' + src;
-    this.clicked = 0;  // votes
-    this.shown = 0;
+    //productsAray is an array of object literals—not Product (constructor)
+    const productsArray = JSON.parse(localStorage.allProducts);
+    console.log('productsArray:', productsArray);
 
-    allProducts.push(this);
-}
+    for (let i = 0; i < productsArray.length; i++) {
+        // productsArray[i] === {name: 'R2D2 Travel Bag', id: 'bag', src: './images/...', clicked: 1}
+        // make sure each product has an updated sliced property
+        const product = new Product(productsArray[i].name, productsArray[i].id, productsArray[i].src, productsArray[i].clicked);
+        console.log('current product: ', allProducts);
+        console.log('products array:', allProducts);
+        allProducts.push(product);
+    }
+} else {
+    // if we don't have stored products:
+    // create new products and put them in our product array
 
-function renderProducts() {
-    const bag = new Product ('R2D2 Travel Bag', 'bag', 'bag.jpg');
-    const banana = new Product ('Banana Slicer', 'banana', 'banana.jpg' );
-    const bathroom = new Product ('Bathroom', 'bathroom', 'bathroom.jpg');
-    const boots = new Product ('Boots', 'boots', 'boots.jpg');
-    const breakfast = new Product ('Breakfast', 'breakfast', 'breakfast.jpg');
-    const bubblegum = new Product ('Bubblegum', 'bubblegum', 'bubblegum.jpg');
-    const chair = new Product ('Chair', 'chair', 'chair.jpg');
-    const cthulhu = new Product ('Cthulhu', 'cthulhu', 'cthulhu.jpg');
-    const dogduck = new Product ('Dog Duck', 'dogduck', 'dog-duck.jpg');
-    const dragon = new Product ('Dragon', 'dragon', 'dragon.jpg');
-    const pen = new Product ('Pen', 'pen', 'pen.jpg');
-    const petsweep = new Product ('Pet Sweep', 'petsweep', 'pet-sweep.jpg');
-    const scissors = new Product ('Scissors', 'scissors', 'scissors.jpg');
-    const shark = new Product ('Shark', 'shark', 'shark.jpg');
-    const sweep = new Product ('Sweep', 'sweep', 'sweep.png');
-    const tauntaun = new Product ('Tauntaun', 'tauntaun', 'tauntaun.jpg');
-    const unicorn = new Product ('Unicorn', 'unicorn', 'unicorn.jpg');
+    const bag = new Product ('R2D2 Travel Bag', 'bag', './images/bag.jpg');
+    const banana = new Product ('Banana Slicer', 'banana', './images/banana.jpg' );
+    const bathroom = new Product ('Bathroom', 'bathroom', './images/bathroom.jpg');
+    const boots = new Product ('Boots', 'boots', './images/boots.jpg');
+    const breakfast = new Product ('Breakfast', 'breakfast', './images/breakfast.jpg');
+    const bubblegum = new Product ('Bubblegum', 'bubblegum', './images/bubblegum.jpg');
+    const chair = new Product ('Chair', 'chair', './images/chair.jpg');
+    const cthulhu = new Product ('Cthulhu', 'cthulhu', './images/cthulhu.jpg');
+    const dogduck = new Product ('Dog Duck', 'dogduck', './images/dog-duck.jpg');
+    const dragon = new Product ('Dragon', 'dragon', './images/dragon.jpg');
+    const pen = new Product ('Pen', 'pen', './images/pen.jpg');
+    const petsweep = new Product ('Pet Sweep', 'petsweep', './images/pet-sweep.jpg');
+    const scissors = new Product ('Scissors', 'scissors', './images/scissors.jpg');
+    const shark = new Product ('Shark', 'shark', './images/shark.jpg');
+    const sweep = new Product ('Sweep', 'sweep', './images/sweep.png');
+    const tauntaun = new Product ('Tauntaun', 'tauntaun', './images/tauntaun.jpg');
+    const unicorn = new Product ('Unicorn', 'unicorn', './images/unicorn.jpg');
     const usb = new Product ('USB', 'usb', 'usb.gif');
-    const watercan = new Product ('Water Can', 'watercan', 'water-can.jpg');
-    const wineglass = new Product ('Wine Glass', 'wineglass', 'wine-glass.jpg');
+    const watercan = new Product ('Water Can', 'watercan', './images/water-can.jpg');
+    const wineglass = new Product ('Wine Glass', 'wineglass', './images/wine-glass.jpg');
+
+    allProducts = [bag, banana, boots, breakfast, bubblegum, chair, cthulhu, dogduck, dragon, pen, petsweep, scissors, shark, sweep, tauntaun, unicorn, usb, watercan, wineglass];
 }
 
-renderProducts();
-console.log(allProducts);
 
-
-// number of votes; needs to tie click function
-
-Product.prototype.wasClicked = function () {
-    this.clicked += 1;
-};
-
-
-// number of displays
-
-Product.prototype.wasShown = function() {
-    this.shown += 1;
-};
-
-
-Product.prototype.render = function () {
-    const sectionSurvey = document.getElementById('survey');
-    const img = document.createElement('img');
-    // const h2 = document.createElement('h2');
-    img.src = this.src;
-    // h2.textContent = this.name
-    
-    // TODO check if it's adding a id
-    img.classList.add(this.id);
-    sectionSurvey.appendChild(img);
-    // sectionSurvey.appendChild(h2);
-    return img;
-};
-
-
-//****DISPLAY FUNCTIONS****//   //display three random images
-
-function showRandomProduct() {     // use the random function, retrieve by index 
-    // const sectionSurvey = document.getElementById('survey'); // remove
-    randomProduct = allProducts[Math.floor(Math.random() * allProducts.length)]; // show random image from allProducts array, save in randomProduct
-    randomProduct.render(); // returns img element
-    // sectionSurvey.appendChild(randomProductEle);
-}
-
-for (let i = 0; i < 3; i++) {
+for (let i = 0; i < 3; i++) { 
     showRandomProduct();
 }
 
 
 //****VOTING FUNCTIONS****//
 
+const survey = document.getElementById('survey');
 survey.addEventListener('click', clickHandler);
+
 
 function clickHandler (e) {
     const clickedProduct = e.target; // html element that was clicked
@@ -126,7 +97,18 @@ function clickHandler (e) {
 }
 
 
-//****END SURVEY****//
+//****DISPLAY FUNCTIONS****//   //display three random images
+
+function showRandomProduct() {     // use the random function, retrieve by index 
+    const survey = document.getElementById('survey'); // do I need this?
+    
+    randomProduct = allProducts[Math.floor(Math.random() * allProducts.length)]; // show random image from allProducts array, save in randomProduct
+    const randomProductEle = randomProduct.render(); // returns img element
+    survey.appendChild(randomProductEle);
+}
+
+
+//****END SURVEY, DRAW CHART****//
 
 function endSurvey () {
     // remove click listener on survey section
@@ -137,4 +119,78 @@ function endSurvey () {
     drawChart();
 }
 
-//****DISALLOW REPEATS****//
+    // TODO save the fruits in localstorage!
+    // JSON.stringify turns an array of objects into a nice string
+    localStorage.setItem('allProducts', JSON.stringify(allProducts));
+    // ^ same thing as: localStorage.fruits = fruits;
+
+
+//+++++DRAW CHART, INPUT RECEIVED+++++//
+
+function drawChart () {
+    // get canvas element and its context
+    const canvas = document.getElementById('endCard'); 
+    const context = canvas.getContext('2d');
+  
+    // TODO make this prettier
+    // add graphic to canvas
+    context.fillStyle = 'rgba(200,100,200,1)';
+    context.fillRect(0,0,200,200);
+  
+    // TODO make this prettier
+    // add text that says "input received"
+    context.font = '20px sans-serif';
+    for (let i = 0; i < 10; i++) {
+        context.strokeText('input received', 200, 200);
+    }
+  
+    //+++++ADD PERSISTENCE+++++//
+    const productNames = [];
+    const clickedData = []; 
+  
+    for ( let i = 0; i < allProducts.length; i++ ){
+        productNames.push(allProducts[i].type); // check this if you run into trouble, was fruits[i]
+        clickedData.push(allProducts[i].clicked); // 
+  
+        console.log( 'product names:', productNames );
+        console.log( 'clicked data:', clickedData );
+    }
+  
+
+ // TODO add a chart that shows number of votes per product
+ const chartCanvas = document.getElementById('chart');
+ const chartCtx = chartCanvas.getContext('2d');
+
+ const chart = new Chart (
+     chartCtx, // first param is the canvas context
+     { // first level children: type, data, options
+         type: 'bar',
+         data: { // data's children: labels, datasets
+             labels: productNames, // ['apple','watermelon','bomb'], // y axis labels
+             datasets: [
+                 { // dataset object's children: label, data, backgroundColor
+                     label: 'Number of votes',
+                     data: clickedData, // [5,2,0], // data points
+                     backgroundColor: 'rgba(255,100,20,1)'
+                 }
+             ]
+         },
+         options: {
+               title: {
+                   display: true,
+                   text: 'Products Popularity'
+               },
+               scales: {
+                   yAxes: [{
+                       ticks: {
+                           beginAtZero: true
+                       }
+                   }]
+               }
+         }
+     }
+ );
+}
+
+// TODO Disallow Repeats
+
