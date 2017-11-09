@@ -4,6 +4,8 @@ let clicks = 0;
 let shown = 0;
 let allProducts = []; // is no longer pushed from constructor function
 
+// Getting all products from local storage
+
 if (localStorage.allProducts) {
     console.log('We have products');
 
@@ -18,10 +20,12 @@ if (localStorage.allProducts) {
         // productsArray[i] === {name: 'R2D2 Travel Bag', id: 'bag', src: './images/...', clicked: 1}
         // make sure each product has an updated sliced property
         const product = new Product(productsArray[i].name, productsArray[i].id, productsArray[i].src, productsArray[i].clicked);
-        console.log('current product: ', allProducts);
-        console.log('products array:', allProducts);
+
         allProducts.push(product);
     }
+    console.log('current product: ', allProducts);
+    console.log('products array:', allProducts);
+
 } else {
     // if we don't have stored products:
     // create new products and put them in our product array
@@ -43,7 +47,7 @@ if (localStorage.allProducts) {
     const sweep = new Product ('Sweep', 'sweep', './images/sweep.png');
     const tauntaun = new Product ('Tauntaun', 'tauntaun', './images/tauntaun.jpg');
     const unicorn = new Product ('Unicorn', 'unicorn', './images/unicorn.jpg');
-    const usb = new Product ('USB', 'usb', 'usb.gif');
+    const usb = new Product ('USB', 'usb', './images/usb.gif');
     const watercan = new Product ('Water Can', 'watercan', './images/water-can.jpg');
     const wineglass = new Product ('Wine Glass', 'wineglass', './images/wine-glass.jpg');
 
@@ -117,13 +121,12 @@ function endSurvey () {
 
     console.table(allProducts);
     drawChart();
-}
 
     // TODO save the fruits in localstorage!
     // JSON.stringify turns an array of objects into a nice string
     localStorage.setItem('allProducts', JSON.stringify(allProducts));
     // ^ same thing as: localStorage.fruits = fruits;
-
+}
 
 //+++++DRAW CHART, INPUT RECEIVED+++++//
 
@@ -149,7 +152,7 @@ function drawChart () {
     const clickedData = []; 
   
     for ( let i = 0; i < allProducts.length; i++ ){
-        productNames.push(allProducts[i].type); // check this if you run into trouble, was fruits[i]
+        productNames.push(allProducts[i].name); // check this if you run into trouble, was fruits[i]
         clickedData.push(allProducts[i].clicked); // 
   
         console.log( 'product names:', productNames );

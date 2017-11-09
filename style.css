@@ -6,3 +6,7 @@
 div.product {
     display: inline;
 }
+
+#chart-container {
+    width: 75%;
+}
