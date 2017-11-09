@@ -1,10 +1,10 @@
 // product constructor function
 
-function Product(name, id, src) {
+function Product(name, id, src, clicked) {
     this.name = name;
     this.id = id;
-    this.src = './images/' + src;
-    this.clicked = 0;  // votes
+    this.src = src;
+    this.clicked = clicked || 0;  // votes
     this.shown = 0;
 }
 
@@ -24,11 +24,10 @@ Product.prototype.wasShown = function() {
 
 
 Product.prototype.render = function () {
-    const divSurvey = document.getElementById('survey');
+    const sectionSurvey = document.getElementById('survey');
     const img = document.createElement('img');
-    img.src = this.src;
-    // TODO check if it's adding a id
+    img.src = this.src;    
     img.classList.add(this.id);
-    divSurvey.appendChild.img;
+    sectionSurvey.appendChild(img);
     return img;
-}
+};
