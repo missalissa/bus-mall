@@ -54,11 +54,7 @@ if (localStorage.allProducts) {
     allProducts = [bag, banana, boots, breakfast, bubblegum, chair, cthulhu, dogduck, dragon, pen, petsweep, scissors, shark, sweep, tauntaun, unicorn, usb, watercan, wineglass];
 }
 
-
-for (let i = 0; i < 3; i++) { 
-    showRandomProduct();
-}
-
+showRandomProduct();
 
 //****VOTING FUNCTIONS****//
 
@@ -89,9 +85,8 @@ function clickHandler (e) {
         }
 
     // render a new element
-        for (let i = 0; i < 3; i++) {   
-            showRandomProduct();
-        }
+        showRandomProduct();
+    
         
     // end survey, increase number of times clicked and if over 5, call endSurvey()
         clicks++;
@@ -104,11 +99,23 @@ function clickHandler (e) {
 //****DISPLAY FUNCTIONS****//   //display three random images
 
 function showRandomProduct() {     // use the random function, retrieve by index 
-    const survey = document.getElementById('survey'); // do I need this?
+    const survey = document.getElementById('survey');
+    const imagesShown = [];  // tracking what image has be shown
     
-    randomProduct = allProducts[Math.floor(Math.random() * allProducts.length)]; // show random image from allProducts array, save in randomProduct
-    const randomProductEle = randomProduct.render(); // returns img element
-    survey.appendChild(randomProductEle);
+    while (imagesShown.length < 3) {
+        // get random product
+        randomProduct = allProducts[Math.floor(Math.random() * allProducts.length)]; // show random image from allProducts array, save in randomProduct
+        
+        // check if it's inside of imagesShown
+        
+        // if it is there, don't do anything
+        // if it's not there, add it to images shown and render in DOM
+        if (!imagesShown.includes(randomProduct)) {
+            imagesShown.push(randomProduct);  
+            const randomProductEle = randomProduct.render(); // returns img element
+            survey.appendChild(randomProductEle);
+        }
+    }
 }
 
 
