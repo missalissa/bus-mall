@@ -1,5 +1,31 @@
+body {
+    margin: 0;
+    background-color: #b1d6f6;
+}
+
+main {
+    width: 70%;
+    margin: 0 auto;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Open Sans', sans-serif;    
+}
+
+h1 {
+    font-size: 5em;
+}
+
+#intro {
+    background-image: url("images/bus.jpg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+}
+
 #survey img {
     width: 300px;
+    padding: 10px;
     /* style padding */
 }
 

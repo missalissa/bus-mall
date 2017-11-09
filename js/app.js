@@ -172,11 +172,11 @@ function drawChart () {
  const chartCtx = chartCanvas.getContext('2d');
 
  const chart = new Chart (
-     chartCtx, // first param is the canvas context
+     chartCtx, // first parameter is the canvas context
      { // first level children: type, data, options
          type: 'bar',
          data: { // data's children: labels, datasets
-             labels: productNames, // ['apple','watermelon','bomb'], // y axis labels
+             labels: productNames, // y axis labels
              datasets: [
                  { // dataset object's children: label, data, backgroundColor
                      label: 'Number of votes',
@@ -201,6 +201,3 @@ function drawChart () {
      }
  );
 }
-
-// TODO Disallow Repeats
-
