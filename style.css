@@ -4,23 +4,39 @@ body {
 }
 
 main {
-    width: 70%;
-    margin: 0 auto;
+    /* width: 70%; */
+    /* margin: 0 auto; */
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6, p {
     font-family: 'Open Sans', sans-serif;    
 }
 
 h1 {
     font-size: 5em;
+    margin-top: 45px;
+    margin-bottom: 0px;
+    color: #0b4d88;
 }
 
-#intro {
+p {
+    color: #0b4d88;
+    font-weight: bold;
+}
+
+#header {
     background-image: url("images/bus.jpg");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: right;
+    height: 240px;
+    width: 70%;  
+    margin: auto;  
+}
+
+#survey {
+    width: 70%;
+    margin: auto;
 }
 
 #survey img {
@@ -34,5 +50,12 @@ div.product {
 }
 
 #chart-container {
-    width: 75%;
+    background-color: #0b4d88;    
+}
+
+#bar-chart {
+    margin: auto;
+    padding-top: 50px;
+    padding-bottom: 20px;
+    width: 80%;
 }
