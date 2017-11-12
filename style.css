@@ -1,31 +1,45 @@
 body {
     margin: 0;
-    background-color: #b1d6f6;
-}
-
-main {
-    /* width: 70%; */
-    /* margin: 0 auto; */
+    background-color: #FCE8B9;    
 }
 
 h1, h2, h3, h4, h5, h6, p {
-    font-family: 'Open Sans', sans-serif;    
+    font-family: 'Open Sans', sans-serif;     
 }
 
 h1 {
     font-size: 5em;
-    margin-top: 45px;
+    line-height: 1em;
+    margin-top: 75px;
     margin-bottom: 0px;
+    padding-top: 75px;
     color: #0b4d88;
+}
+
+h4 {
+    font-weight: 300;
+    letter-spacing: 2px;
+    color: #0b4d88;
+    text-transform: uppercase;
+    margin-top: 0;
+    padding-left: 7px;
 }
 
 p {
     color: #0b4d88;
-    font-weight: bold;
+    font-size: 1.25em;
+    font-weight: 400;
+    line-height: 1.8em;
+}
+
+#header-container {
+    background-color: #FFFFFF;    
+    padding-top: 1px;
+    padding-bottom: 50px;
 }
 
 #header {
-    background-image: url("images/bus.jpg");
+    background-image: url("images/bus.png");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: right;
@@ -37,12 +51,26 @@ p {
 #survey {
     width: 70%;
     margin: auto;
+    display: flex;
+    justify-content: space-between;
 }
 
 #survey img {
     width: 300px;
-    padding: 10px;
-    /* style padding */
+    height: 300px;
+    margin-top: 25px;
+    margin-bottom: 75px;
+    border-radius: 50%;
+}
+
+#survey-text {
+    padding-left: 20%;
+    padding-right: 20%;  
+    margin-top: 75px;
+}
+
+#survey-text p {
+    text-align: center;
 }
 
 div.product {

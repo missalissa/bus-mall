@@ -91,7 +91,7 @@ function clickHandler (e) {
         
     // end survey, increase number of times clicked and if over 5, call endSurvey()
         clicks++;
-        if (clicks >= 5) {
+        if (clicks >= 25) {
             endSurvey();
         }
 }
@@ -179,7 +179,7 @@ function drawChart () {
                 datasets: [
                     { // dataset object's children: label, data, backgroundColor
                         label: 'Votes Received',
-                        data: clickedData, // [5,2,0], // data points
+                        data: clickedData, // data points
                         backgroundColor: '#fad680',
                     }
                 ]
