@@ -56,7 +56,8 @@ if (localStorage.allProducts) {
 
 showRandomProduct();
 
-//****VOTING FUNCTIONS****//
+
+//+++++VOTING FUNCTIONS+++++//
 
 const survey = document.getElementById('survey');
 survey.addEventListener('click', clickHandler);
@@ -96,7 +97,7 @@ function clickHandler (e) {
 }
 
 
-//****DISPLAY FUNCTIONS****//   //display three random images
+//+++++DISPLAY FUNCTIONS+++++//   display three random images
 
 function showRandomProduct() {     // use the random function, retrieve by index 
     const survey = document.getElementById('survey');
@@ -119,7 +120,7 @@ function showRandomProduct() {     // use the random function, retrieve by index
 }
 
 
-//****END SURVEY, DRAW CHART****//
+//+++++END SURVEY, DRAW CHART+++++//
 
 function endSurvey () {
     // remove click listener on survey section
@@ -135,24 +136,21 @@ function endSurvey () {
     // ^ same thing as: localStorage.fruits = fruits;
 }
 
+
 //+++++DRAW CHART, INPUT RECEIVED+++++//
 
 function drawChart () {
+
     // get canvas element and its context
-    const canvas = document.getElementById('endCard'); 
-    const context = canvas.getContext('2d');
-  
-    // TODO make this prettier
-    // add graphic to canvas
-    context.fillStyle = 'rgba(200,100,200,1)';
-    context.fillRect(0,0,200,200);
-  
-    // TODO make this prettier
-    // add text that says "input received"
-    context.font = '20px sans-serif';
-    for (let i = 0; i < 10; i++) {
-        context.strokeText('input received', 200, 200);
-    }
+    // const canvas = document.getElementById('endCard'); 
+    // const context = canvas.getContext('2d');
+
+        // TODO USE THIS IF THERE IS TIME
+        // add text that says "input received"
+        // context.font = '20px sans-serif';
+        // for (let i = 0; i < 10; i++) {
+        // context.fillText('input received', 200, 200);
+        // }
   
     //+++++ADD PERSISTENCE+++++//
     const productNames = [];
@@ -167,37 +165,65 @@ function drawChart () {
     }
   
 
- // TODO add a chart that shows number of votes per product
- const chartCanvas = document.getElementById('chart');
- const chartCtx = chartCanvas.getContext('2d');
+    // TODO add a chart that shows number of votes per product
+    Chart.defaults.global.defaultFontFamily = "Open Sans";    
+    const chartCanvas = document.getElementById('chart');
+    const chartCtx = chartCanvas.getContext('2d');
 
- const chart = new Chart (
-     chartCtx, // first parameter is the canvas context
-     { // first level children: type, data, options
-         type: 'bar',
-         data: { // data's children: labels, datasets
-             labels: productNames, // y axis labels
-             datasets: [
-                 { // dataset object's children: label, data, backgroundColor
-                     label: 'Number of votes',
-                     data: clickedData, // [5,2,0], // data points
-                     backgroundColor: 'rgba(255,100,20,1)'
-                 }
-             ]
-         },
-         options: {
-               title: {
-                   display: true,
-                   text: 'Products Popularity'
-               },
-               scales: {
-                   yAxes: [{
-                       ticks: {
-                           beginAtZero: true
-                       }
-                   }]
-               }
-         }
-     }
- );
+    const chart = new Chart (
+        chartCtx, // first parameter is the canvas context
+        { // first level children: type, data, options
+            type: 'bar',
+            data: { // data's children: labels, datasets
+                labels: productNames, // y axis labels
+                datasets: [
+                    { // dataset object's children: label, data, backgroundColor
+                        label: 'Votes Received',
+                        data: clickedData, // [5,2,0], // data points
+                        backgroundColor: '#fad680',
+                    }
+                ]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'Product Survey',
+                    fontColor: 'white',
+                    fontSize: 32
+                },
+                legend: {
+                    labels: {
+                        fontColor: "white",
+                        fontSize: 18
+                    }
+                },
+                scales: {
+                    yAxes: [{
+                        gridLines: {
+                            display: false
+                        },
+                        ticks: {
+                            fontColor: 'white',
+                            fontSize: 12,
+                            stepSize: 1,
+                            beginAtZero: true,
+ 
+                        }
+                    }],
+                    xAxes: [{
+                        gridLines: {
+                            display: false
+                        },
+                        ticks: {
+                            fontColor: 'white',
+                            fontSize: 12,
+                            stepSize: 1,
+                            beginAtZero: true,
+                            autoSkip: false,
+                        }
+                    }]
+                }
+            }
+        }
+    );
 }

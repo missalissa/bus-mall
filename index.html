@@ -10,17 +10,17 @@
 </head>
 <body>
     <main>
-        <section id ='intro'>
+        <section id ='header'>
             <h1>Bus Mall</h1>
             <p>a consumer survey</p>
         </section>
         <section id="survey"></section>
-        <canvas height="400" width="600" id="endCard">
-                <p>Your browser needs to be updated!</p>    
-        </canvas>
-        <section id = "chart-container">
-            <canvas height="400" width="600" id="chart">></canvas>
-        </section>
+        <!-- <canvas height="400" width="600" id="endCard"> </canvas> -->
+        <div id = "chart-container">
+            <div id = "bar-chart">
+                <canvas height="400" width="600" id="chart">></canvas>
+            </div>
+        </div>
     </main>
     <script src="js/Chart.min.js"></script>
     <script src="js/product.js"></script>
